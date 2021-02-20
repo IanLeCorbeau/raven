@@ -1,4 +1,4 @@
-Work in Progress. Fork of Suckless' dwm.
+Personal build of Suckless' dwm (Dynamic Window Manager)
 
 ### Applied Patches
   * [Fullgaps](https://dwm.suckless.org/patches/fullgaps/)

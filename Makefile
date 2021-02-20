@@ -3,7 +3,7 @@
 
 include config.mk
 
-SRC = drw.c raven.c util.c
+SRC = drw.c raven.c layouts.c util.c
 OBJ = ${SRC:.c=.o}
 
 all: options raven
