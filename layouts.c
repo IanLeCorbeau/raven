@@ -1,4 +1,4 @@
-static void bottomstack(Monitor *m);
+static void bstack(Monitor *m);
 static void stackmode(Monitor *m);
 static void tile(Monitor *m);
 
