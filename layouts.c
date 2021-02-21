@@ -1,4 +1,5 @@
 static void bstack(Monitor *m);
+static void lstack(Monitor *m);
 static void stackmode(Monitor *m);
 static void tile(Monitor *m);
 
@@ -32,6 +33,32 @@ bstack(Monitor *m) {
 				tx += WIDTH(c);
 		}
 	}
+}
+
+void
+lstack(Monitor *m)
+{
+	unsigned int i, n, h, mw, my, ty;
+	Client *c;
+
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if (n == 0)
+		return;
+
+	if (n > m->nmaster)
+		mw = m->nmaster ? m->ww * m->mfact : 0;
+	else
+		mw = m->ww;
+	for (i = 0, my = ty = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		if (i < m->nmaster) {
+			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
+			resize(c, m->wx + m->gappx + m->ww - mw, m->wy + my, mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
+			my += HEIGHT(c) + m->gappx;
+		} else {
+			h = (m->wh - ty) / (n - i) - m->gappx;
+			resize(c, m->wx + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
+			ty += HEIGHT(c) + m->gappx;
+		}
 }
 
 void
