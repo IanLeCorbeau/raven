@@ -13,6 +13,8 @@ The end goal is to rewrite it using the xcb library instead of xlib. Work has al
   * Layouts can be set [pertag](https://dwm.suckless.org/patches/pertag/).
   * Available layouts: tile (default master stack layout), right master/left stack, top master/bottom stack, floating, "stackmode" (just monocle mode with gaps, really).
 
+Bug: the only bug that I'm aware of is very specific and relates to Polybar. If for some reason Polybar is relaunched from a terminal, sometimes the ewmh module will crash, with the only message being: disabling module "ewmh" (reason: XCB_WINDOW(3)). Pretty sure I know the underlying cause, but this issue is so small that I'll probably wait for the xcb rewrite to fix it. In the meantime, simply closing the terminal, reopening it and relaunching Polybar will fix the problem. No need to log out of X and log back in.
+
 A more appropriate README will be made later. For now, some keybindings not in dwm:
 
 MODKEY is Mod4Mask (aka Super/Windows Key)
