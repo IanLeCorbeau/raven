@@ -17,13 +17,13 @@ A more appropriate README will be made later. For now, some keybindings not in d
 
 MODKEY is Mod4Mask (aka Super/Windows Key)
 
-MODKEY + Shift + j/k: [Rotatestack](https://dwm.suckless.org/patches/rotatestack/)
-MODKEY + r: swap master/stack (right master/left stack)
-MODKEY + b: master top/stack bottom
-MODKEY + s: stackmode
-MODKEY + f: toggle floating
-MODKEY + minus/plus: decrease/increase gap size
-MODKEY + Shift + minus: toggle gaps on/off
+MODKEY + Shift + j/k: [Rotatestack](https://dwm.suckless.org/patches/rotatestack/)  
+MODKEY + r: swap master/stack (right master/left stack)  
+MODKEY + b: master top/stack bottom  
+MODKEY + s: stackmode  
+MODKEY + f: toggle floating  
+MODKEY + minus/plus: decrease/increase gap size  
+MODKEY + Shift + minus: toggle gaps on/off  
 
 -----------------
 
