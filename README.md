@@ -2,7 +2,7 @@
 
 The end goal is to rewrite it using the xcb library instead of xlib. Work has already begun on that (because sometimes I get ahead of myself). I have no idea how much of dwm's original code will be left once that is done, since I'm planning on rewriting a lot of functions from scratch, but it will still function like dwm for the most part.
 
-### Current features (or lack therof)
+### Current features (or lack thereof)
 
   * No default status bar. Not because I don't like dwm's bar (quite the contrary), but because I'm not a fan of having it coded into the window manager.
   * Which means most status bar will work (thanks to mihirlad's anybar patch, which was only slightly modified). Tested bars and confirmed to work perfectly: Polybar, Tint2, Lemonbar, Conky.
