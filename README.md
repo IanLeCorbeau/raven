@@ -29,15 +29,15 @@ Installation
 Edit config.mk to match your local setup (raven is installed into
 the /usr/local namespace by default).
 
-Afterwards enter the following command to build and install dwm (if
+Afterwards enter the following command to build and install raven (if
 necessary as root):
 
     make clean install
 
 
-Running dwm
+Running raven
 -----------
-Add the following line to your .xinitrc to start dwm using startx:
+Add the following line to your .xinitrc to start raven using startx:
 
     exec raven
 
@@ -46,7 +46,7 @@ the DISPLAY environment variable is set correctly, e.g.:
 
     DISPLAY=foo.bar:1 exec raven
 
-(This will start dwm on display :1 of the host foo.bar.)
+(This will start raven on display :1 of the host foo.bar.)
 
 Configuration
 -------------
