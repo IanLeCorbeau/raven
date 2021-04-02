@@ -5,8 +5,8 @@ The end goal is to rewrite it using the xcb library instead of xlib. Work has al
 ### Current features (or lack thereof)
 
   * No default status bar. Not because I don't like dwm's bar (quite the contrary), but because I'm not a fan of having it coded into the window manager.
-  * Which means most status bar will work (thanks to mihirlad's anybar patch, which was only slightly modified). Tested bars and confirmed to work perfectly: Polybar, Tint2, Lemonbar, Conky.
-  * Tags have basic [ewmh](https://dwm.suckless.org/patches/ewmhtags/) features, so Polybar's xworkspace module works (though no click and scroll, yet). Tint2's "desktop name" works as well.
+  * Which means most status bar with the 'override_redirect' option will work. 
+  * Tags have basic [ewmh](https://dwm.suckless.org/patches/ewmhtags/) features, so Polybar's xworkspace module works (though no click and scroll, yet).
   * No spawn function, therefore no way to create keybindings in config.h to launch applications. Programs like sxhkd and xbindkeys are more appropriate for that.
   * Which means there's no default keybind to launch a terminal or dmenu.
   * [Gaps](https://dwm.suckless.org/patches/fullgaps/) are present by default.
