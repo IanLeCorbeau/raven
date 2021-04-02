@@ -15,23 +15,13 @@ The end goal is to rewrite it using the xcb library instead of xlib. Work has al
 
 Bug: the only bug that I'm aware of is very specific and relates to Polybar. If for some reason Polybar is relaunched from a terminal, sometimes the ewmh module will crash, with the only message being: disabling module "ewmh" (reason: XCB_WINDOW(3)). Pretty sure I know the underlying cause, but this issue is so small that I'll probably wait for the xcb rewrite to fix it. In the meantime, simply closing the terminal, reopening it and relaunching Polybar will fix the problem. No need to log out of X and log back in.
 
-A more appropriate README will be made later. For now, some keybindings not in dwm:
-
-MODKEY is Mod4Mask (aka Super/Windows Key)
-
-MODKEY + Shift + j/k: [Rotatestack](https://dwm.suckless.org/patches/rotatestack/)  
-MODKEY + r: swap master/stack (right master/left stack)  
-MODKEY + b: master top/stack bottom  
-MODKEY + s: stackmode  
-MODKEY + f: toggle floating  
-MODKEY + minus/plus: decrease/increase gap size  
-MODKEY + Shift + minus: toggle gaps on/off  
+For usage instructions (keybindings, etc...) start reading the manpage.
 
 -----------------
 
 Requirements
 ------------
-In order to build dwm you need the Xlib header files.
+In order to build Raven you need the Xlib header files.
 
 
 Installation
