@@ -1,21 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 8;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const int bar		    = 1;        /* 0 means don't use any bar at all*/
-static const char *barclass         = "Polybar"; /* bar class name */
-static const char dmenufont[]       = "monospace:size=10";
-static const char normbgcolor[]	    = "#222222";
-static const char normbordercolor[] = "#444444";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selfgcolor[]      = "#5294E2";
-static const char selbordercolor[]  = "#5294E2";
-static const char selbgcolor[]      = "#005577";
-static const char *colors[][3]      = {
+static const unsigned int borderpx	= 2;	/* border pixel of windows */
+static const unsigned int gappx		= 8;	/* gaps between windows */
+static const unsigned int snap		= 32;	/* snap pixel */
+static const unsigned int barpadding	= 24;	/* Bar padding in pixel */
+static const int showbar		= 1;	/* 0 means no bar */
+static const int topbar			= 1;	/* 0 means bottom bar */
+static const char normbgcolor[]		= "#222222";
+static const char normbordercolor[]	= "#444444";
+static const char normfgcolor[]		= "#bbbbbb";
+static const char selfgcolor[]		= "#5294E2";
+static const char selbordercolor[]	= "#5294E2";
+static const char selbgcolor[]		= "#005577";
+static const char *colors[][3]		= {
 	/*               fg	      bg           border   */
 	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
 	[SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
