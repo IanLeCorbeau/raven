@@ -1,7 +1,11 @@
 "Raven" is a dynamic window manager, forked from dwm. This is a work in progress. It works perfectly fine, but it's incomplete. "Raven" might just be a temporary name, I just needed a different name to not mix it up with my custom build of dwm.
 
 ```
-The end goal is to rewrite it using the xcb library instead of xlib. Work has already begun on that (because sometimes I get ahead of myself). I have no idea how much of dwm's original code will be left once that is done, since I'm planning on rewriting a lot of functions from scratch, but it will still function like dwm for the most part.
+The end goal is to rewrite it using the xcb library instead of xlib.  
+Work has already begun on that (because sometimes I get ahead of myself).  
+I have no idea how much of dwm's original code will be left once that is done,  
+since I'm planning on rewriting a lot of functions from scratch,  
+but it will still function like dwm for the most part. 
 ```
 
 ### Current features (or lack thereof)
