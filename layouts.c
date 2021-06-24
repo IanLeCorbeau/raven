@@ -1,13 +1,12 @@
-static void bstack(Monitor *m);
-static void lstack(Monitor *m);
-static void stackmode(Monitor *m);
-static void tile(Monitor *m);
+static void bstack(struct Monitor *);
+static void monocle(struct Monitor *);
+static void tile(struct Monitor *);
 
 void
-bstack(Monitor *m)
+bstack(struct Monitor *m)
 {
 	unsigned int i, n, w, mh, mx, tx, ns;
-	Client *c;
+	struct Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
@@ -44,36 +43,10 @@ bstack(Monitor *m)
 }
 
 void
-lstack(Monitor *m)
-{
-	unsigned int i, n, h, mw, my, ty;
-	Client *c;
-
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0)
-		return;
-
-	if (n > m->nmaster)
-		mw = m->nmaster ? m->ww * m->mfact : 0;
-	else
-		mw = m->ww;
-	for (i = 0, my = ty = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-		if (i < m->nmaster) {
-			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
-			resize(c, m->wx + m->gappx + m->ww - mw, m->wy + my, mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
-			my += HEIGHT(c) + m->gappx;
-		} else {
-			h = (m->wh - ty) / (n - i) - m->gappx;
-			resize(c, m->wx + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
-			ty += HEIGHT(c) + m->gappx;
-		}
-}
-
-void
-stackmode(Monitor *m)
+monocle(struct Monitor *m)
 {
 	unsigned int n = 0;
-	Client *c;
+	struct Client *c;
 
 	for (c = m->clients; c; c = c->next)
 		if (ISVISIBLE(c))
@@ -85,10 +58,10 @@ stackmode(Monitor *m)
 }
 
 void
-tile(Monitor *m)
+tile(struct Monitor *m)
 {
 	unsigned int i, n, h, mw, my, ty;
-	Client *c;
+	struct Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
