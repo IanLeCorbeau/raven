@@ -1,18 +1,26 @@
 /* See LICENSE file for copyright and license details. */
+#include <err.h>
+#include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "raven.h"
 
 void *
-ecalloc(size_t nmemb, size_t size)
+xcalloc(size_t no, size_t siz)
 {
-	void *p;
+	void	*p;
 
-	if (!(p = calloc(nmemb, size)))
-		die("calloc:");
+	if (siz == 0 || no == 0)
+		errx(1, "xcalloc: zero size");
+	if (SIZE_MAX / no < siz)
+		errx(1, "xcalloc: no * siz > SIZE_MAX");
+	if ((p = calloc(no, siz)) == NULL)
+		err(1, "calloc");
+
 	return p;
 }
 

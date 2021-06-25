@@ -1,8 +1,15 @@
 #ifndef RAVEN_H
 #define RAVEN_H
 
-#include <X11/Xlib.h>
+#include <X11/cursorfont.h>
 #include <X11/keysym.h>
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+#include <X11/Xproto.h>
+#include <X11/Xutil.h>
+#ifdef XINERAMA
+#include <X11/extensions/Xinerama.h>
+#endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
 
 /* macros */
@@ -253,6 +260,6 @@ int		 xerrordummy(Display *dpy, XErrorEvent *ee);
 int		 xerrorstart(Display *dpy, XErrorEvent *ee);
 void		 zoom(const Arg *arg);
 void		 die(const char *fmt, ...);
-void		*ecalloc(size_t nmemb, size_t size);
+void		*xcalloc(size_t, size_t);
 
 #endif

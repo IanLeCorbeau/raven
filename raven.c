@@ -23,6 +23,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include <err.h>
 #include <errno.h>
 #include <locale.h>
 #include <signal.h>
@@ -31,17 +32,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-#include <X11/cursorfont.h>
-#include <X11/keysym.h>
-#include <X11/Xatom.h>
-#include <X11/Xlib.h>
-#include <X11/Xproto.h>
-#include <X11/Xutil.h>
-#ifdef XINERAMA
-#include <X11/extensions/Xinerama.h>
-#endif /* XINERAMA */
-#include <X11/Xft/Xft.h>
 
 #include "raven.h"
 
@@ -433,7 +423,7 @@ createmon(void)
 	struct Monitor *m;
 	unsigned int i;
 
-	m = ecalloc(1, sizeof(struct Monitor));
+	m = xcalloc(1, sizeof(struct Monitor));
 	m->tagset[0] = m->tagset[1] = 1;
 	m->mfact = mfact;
 	m->nmaster = nmaster;
@@ -444,7 +434,7 @@ createmon(void)
 	m->lt[0] = &layouts[0];
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
 	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
-	m->pertag = ecalloc(1, sizeof(Pertag));
+	m->pertag = xcalloc(1, sizeof(Pertag));
 	m->pertag->curtag = m->pertag->prevtag = 1;
 
 	for (i = 0; i <= LENGTH(tags); i++) {
@@ -790,7 +780,7 @@ manage(Window w, XWindowAttributes *wa)
 	Window trans = None;
 	XWindowChanges wc;
 
-	c = ecalloc(1, sizeof(struct Client));
+	c = xcalloc(1, sizeof(struct Client));
 	c->win = w;
 	/* geometry */
 	c->x = c->oldx = wa->x;
@@ -1375,7 +1365,7 @@ setup(void)
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
 	/* init appearance */
-	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
+	scheme = xcalloc(LENGTH(colors), sizeof(Clr *));
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i], 3);
 	/* supporting window for NetWMCheck */
@@ -1648,7 +1638,7 @@ updategeom(void)
 
 		for (n = 0, m = mons; m; m = m->next, n++);
 		/* only consider unique geometries as separate screens */
-		unique = ecalloc(nn, sizeof(XineramaScreenInfo));
+		unique = xcalloc(nn, sizeof(XineramaScreenInfo));
 		for (i = 0, j = 0; i < nn; i++)
 			if (isuniquegeom(unique, j, &info[i]))
 				memcpy(&unique[j++], &info[i], sizeof(XineramaScreenInfo));
@@ -1935,11 +1925,11 @@ main(int argc, char *argv[])
 	if (argc == 2 && !strcmp("-v", argv[1]))
 		die("raven-"VERSION);
 	else if (argc != 1)
-		die("usage: raven [-v]");
+		errx(1, "usage: raven [-v]");
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
-		fputs("warning: no locale support\n", stderr);
+		warnx("warning: no locale support");
 	if (!(dpy = XOpenDisplay(NULL)))
-		die("raven: cannot open display");
+		errx(1, "raven: cannot open display \"%s\"", XDisplayName(NULL));
 	checkotherwm();
 	setup();
 #ifdef __OpenBSD__
