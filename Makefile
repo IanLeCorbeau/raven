@@ -1,4 +1,4 @@
-# raven - a dynamic window manager built from Suckless' dwm.
+# raven - dynamic window manager
 # See LICENSE file for copyright and license details.
 
 include config.mk

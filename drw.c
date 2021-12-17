@@ -13,7 +13,7 @@
 Drw *
 drw_create(Display *dpy, int screen, Window root, unsigned int w, unsigned int h)
 {
-	Drw *drw = xcalloc(1, sizeof(Drw));
+	Drw *drw = ecalloc(1, sizeof(Drw));
 
 	drw->dpy = dpy;
 	drw->screen = screen;
@@ -69,7 +69,7 @@ drw_scm_create(Drw *drw, const char *clrnames[], size_t clrcount)
 	Clr *ret;
 
 	/* need at least two colors for a scheme */
-	if (!drw || !clrnames || clrcount < 2 || !(ret = xcalloc(clrcount, sizeof(XftColor))))
+	if (!drw || !clrnames || clrcount < 2 || !(ret = ecalloc(clrcount, sizeof(XftColor))))
 		return NULL;
 
 	for (i = 0; i < clrcount; i++)
@@ -111,7 +111,7 @@ drw_cur_create(Drw *drw, int shape)
 {
 	Cur *cur;
 
-	if (!drw || !(cur = xcalloc(1, sizeof(Cur))))
+	if (!drw || !(cur = ecalloc(1, sizeof(Cur))))
 		return NULL;
 
 	cur->cursor = XCreateFontCursor(drw->dpy, shape);

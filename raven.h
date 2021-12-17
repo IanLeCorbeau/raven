@@ -70,7 +70,7 @@ struct Client {
 };
 
 typedef struct {
-	Cursor cursor;
+	Cursor		 cursor;
 } Cur;
 
 typedef struct Fnt {
@@ -84,14 +84,14 @@ typedef struct Fnt {
 typedef XftColor Clr;
 
 typedef struct {
-	unsigned int w, h;
-	Display *dpy;
-	int screen;
-	Window root;
-	Drawable drawable;
-	GC gc;
-	Clr *scheme;
-	Fnt *fonts;
+	unsigned int	 w, h;
+	Display		*dpy;
+	int		 screen;
+	Window		 root;
+	Drawable	 drawable;
+	GC		 gc;
+	Clr		*scheme;
+	Fnt		*fonts;
 } Drw;
 
 struct Key {
@@ -103,7 +103,7 @@ struct Key {
 
 struct Layout {
 	const char	*symbol;
-	void		(*arrange)(struct Monitor *);
+	void	       (*arrange)(struct Monitor *);
 };
 
 typedef struct Pertag Pertag;
@@ -131,12 +131,12 @@ struct Monitor {
 };
 
 struct Rule {
-	const char	*class;
-	const char	*instance;
-	const char	*title;
-	unsigned int	 tags;
-	int		 isfloating;
-	int		 monitor;
+	const char		*class;
+	const char		*instance;
+	const char		*title;
+	unsigned int		 tags;
+	int			 isfloating;
+	int			 monitor;
 };
 
 /* variables */
@@ -176,16 +176,16 @@ void		 destroynotify(XEvent *e);
 void		 detach(struct Client *c);
 void		 detachstack(struct Client *c);
 struct Monitor	*dirtomon(int dir);
-Drw *drw_create(Display *dpy, int screen, Window win, unsigned int w, unsigned int h);
-void drw_resize(Drw *drw, unsigned int w, unsigned int h);
-void drw_free(Drw *drw);
-void drw_clr_create(Drw *drw, Clr *dest, const char *clrname);
-Clr *drw_scm_create(Drw *drw, const char *clrnames[], size_t clrcount);
-Cur *drw_cur_create(Drw *drw, int shape);
-void drw_cur_free(Drw *drw, Cur *cursor);
-void drw_setscheme(Drw *drw, Clr *scm);
-void drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert);
-void drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
+Drw		*drw_create(Display *dpy, int screen, Window win, unsigned int w, unsigned int h);
+void		 drw_resize(Drw *drw, unsigned int w, unsigned int h);
+void		 drw_free(Drw *drw);
+void		 drw_clr_create(Drw *drw, Clr *dest, const char *clrname);
+Clr		*drw_scm_create(Drw *drw, const char *clrnames[], size_t clrcount);
+Cur		*drw_cur_create(Drw *drw, int shape);
+void		 drw_cur_free(Drw *drw, Cur *cursor);
+void		 drw_setscheme(Drw *drw, Clr *scm);
+void		 drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert);
+void		 drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h);
 void		 enqueue(struct Client *c);
 void		 enqueuestack(struct Client *c);
 void		 enternotify(XEvent *e);
@@ -222,16 +222,16 @@ int		 sendevent(struct Client *c, Atom proto);
 void		 sendmon(struct Client *c, struct Monitor *m);
 void		 setclientstate(struct Client *c, long state);
 void		 setcurrenttag(void);
+void		 setnumtags(void);
+void		 settagnames(void);
+void		 setviewport(void);
 void		 setfocus(struct Client *c);
 void		 setfullscreen(struct Client *c, int fullscreen);
 void		 setgaps(const Arg *arg);
 void		 setlayout(const Arg *arg);
 void		 setmfact(const Arg *arg);
-void		 setnumtags(void);
-void		 settagnames(void);
 void		 setup(void);
 void		 seturgent(struct Client *c, int urg);
-void		 setviewport(void);
 void		 showhide(struct Client *c);
 void		 sigchld(int unused);
 void		 tag(const Arg *arg);
@@ -244,6 +244,7 @@ void		 unfocus(struct Client *c, int setfocus);
 void		 unmanage(struct Client *c, int destroyed);
 void		 unmapnotify(XEvent *e);
 void		 updatebarpos(struct Monitor *m);
+void		 updatestatus(void);
 void		 updateclientlist(void);
 void		 updatecurrenttag(void);
 int		 updategeom(void);
@@ -252,6 +253,7 @@ void		 updatesizehints(struct Client *c);
 void		 updatetitle(struct Client *c);
 void		 updatewindowtype(struct Client *c);
 void		 updatewmhints(struct Client *c);
+void		 updatecurrenttag(void);
 void		 view(const Arg *arg);
 struct Client	*wintoclient(Window w);
 struct Monitor	*wintomon(Window w);
@@ -260,6 +262,7 @@ int		 xerrordummy(Display *dpy, XErrorEvent *ee);
 int		 xerrorstart(Display *dpy, XErrorEvent *ee);
 void		 zoom(const Arg *arg);
 void		 die(const char *fmt, ...);
-void		*xcalloc(size_t, size_t);
+void		*ecalloc(size_t, size_t);
+//void		*xcalloc(size_t, size_t);
 
 #endif
