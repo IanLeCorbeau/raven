@@ -1,8 +1,9 @@
 "Raven" is a dynamic window manager, forked from my [custom build of Suckless' dwm](https://github.com/I-LeCorbeau/dwm). The end goal is to rewrite it using the xcb library instead of xlib.
 
 ```
-Important note: this is still in development. If you want to try it, get the raven-base release instead of using the git version.  
-While raven-base is currently even with the git main branch, this will inevitably change as the xcb rewrite occurs.
+Important note: this is still in development. If you want to try it, get the raven-base  
+release instead of using the git version. While raven-base is currently even with the git  
+main branch, this will inevitably change as the xcb rewrite occurs.
 ```
 
 ### Current features (or lack thereof)
