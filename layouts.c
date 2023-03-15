@@ -1,7 +1,8 @@
-static void bottomstack(struct Monitor *);
-static void monocle(struct Monitor *);
-static void rightmaster(struct Monitor *);
-static void tile(struct Monitor *);
+static void bottomstack(Monitor *m);
+static void deck(Monitor *m);
+static void monocle(Monitor *m);
+static void rightmaster(Monitor *m);
+static void tile(Monitor *);
 
 void
 bottomstack(struct Monitor *m)
@@ -44,10 +45,35 @@ bottomstack(struct Monitor *m)
 }
 
 void
-monocle(struct Monitor *m)
+deck(Monitor *m) {
+	unsigned int i, n, h, mw, my;
+	Client *c;
+
+	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+	if(n == 0)
+		return;
+
+	if(n > m->nmaster) {
+		mw = m->nmaster ? m->ww * m->mfact : 0;
+		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n - m->nmaster);
+	}
+	else
+		mw = m->ww - m->gappx;
+	for (i = my = 0, my = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		if(i < m->nmaster) {
+			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
+			resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), False);
+			my += HEIGHT(c) + m->gappx;
+		}
+		else
+			resize(c, m->wx + mw + m->gappx, m->wy + m->gappx, m->ww - mw - (2*c->bw) - 2*m->gappx, m->wh - (2*c->bw) - 2*m->gappx, False);
+}
+
+void
+monocle(Monitor *m)
 {
 	unsigned int n = 0;
-	struct Client *c;
+	Client *c;
 
 	for (c = m->clients; c; c = c->next)
 		if (ISVISIBLE(c))
@@ -59,10 +85,10 @@ monocle(struct Monitor *m)
 }
 
 void
-rightmaster(struct Monitor *m)
+rightmaster(Monitor *m)
 {
 	unsigned int i, n, h, mw, my, ty;
-	struct Client *c;
+	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
@@ -85,10 +111,10 @@ rightmaster(struct Monitor *m)
 }
 
 void
-tile(struct Monitor *m)
+tile(Monitor *m)
 {
 	unsigned int i, n, h, mw, my, ty;
-	struct Client *c;
+	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
@@ -109,4 +135,6 @@ tile(struct Monitor *m)
 			ty += HEIGHT(c) + m->gappx;
 		}
 }
+
+
 

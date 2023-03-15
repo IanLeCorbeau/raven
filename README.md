@@ -1,64 +1,77 @@
-"Raven" is a dynamic window manager, forked from my [custom build of Suckless' dwm](https://github.com/I-LeCorbeau/dwm). The end goal is to rewrite it using the xcb library instead of xlib.
+Raven
+=====
 
-```
-Important note: this is still in development. If you want to try it, get the raven-base  
-release instead of using the git version. While raven-base is currently even with the git  
-main branch, this will inevitably change as the xcb rewrite occurs.
-```
+A dynamic window manager forked from Suckless' [dwm](https://dwm.suckless.org/).
+This exists simply to avoid conflicting with Debian's dwm package and because in 
+time it will diverge even more significantly from upsteam, beyond applying simple
+patches.
 
-### Current features (or lack thereof)
+Layouts
+-------
 
-  * No default status bar. Not because I don't like dwm's bar (quite the contrary), but because I'm not a fan of having it coded into the window manager.
-  * Which means most status bars with the 'override_redirect' option will work. 
-  * Tags have basic [ewmh](https://dwm.suckless.org/patches/ewmhtags/) support, so Polybar's xworkspace module works (though no click and scroll, yet).
-  * No spawn function, therefore no way to create keybindings in config.h to launch applications. Programs like sxhkd and xbindkeys are more appropriate for that.
-  * Which means there's no default keybind to launch a terminal or dmenu.
-  * Layouts can be set [pertag](https://dwm.suckless.org/patches/pertag/).
-  * Available layouts: tile (default master stack layout), rightmaster, top master/bottom stack, monocle, floating.
-  * [Gaps](https://dwm.suckless.org/patches/fullgaps/) are present by default, even in monocle mode.
+* Tile (classic Master/Stack)
+* Right Master/Left Stack
+* Bottom Stack
+* Deck
+* Monocle
 
-For usage instructions (keybindings, etc...) start reading the manpage.
+Extra Features
+--------------
 
-### TODO
-- Restructure the code to adhere to OpenBSD's KNF [style(9)](https://man.openbsd.org/style)
-- XCB rewrite with version 1.0 (underway)
+* Gaps
+* Layouts can be set per tag
+* Adjustable status bar height
+* More to come
 
------------------
-
-Requirements
-------------
+Building Requirements
+---------------------
 In order to build Raven you need the Xlib header files.
 
+A Debian package can be built by running the
+
+```
+debuild -i -us -uc -b
+```
+
+command, provided the __devscripts__ package is installed.
 
 Installation
 ------------
-Edit config.mk to match your local setup (raven is installed into
-the /usr/local namespace by default).
+Edit config.mk to match your local setup (Raven is installed into
+the /usr namespace by default).
 
-On OpenBSD: comment (#) FREETYPEINC at line 19, and uncomment the one at line 21 (under # OpenBSD).
-
-Afterwards enter the following command to build and install raven (if
+Afterwards enter the following command to build and install (if
 necessary as root):
 
     make clean install
 
 
-Running raven
------------
-Add the following line to your .xinitrc to start raven using startx:
+Running
+-------
+Add the following line to your .xinitrc to start Raven using startx:
 
     exec raven
 
-In order to connect raven to a specific display, make sure that
+In order to connect Raven to a specific display, make sure that
 the DISPLAY environment variable is set correctly, e.g.:
 
     DISPLAY=foo.bar:1 exec raven
 
 (This will start raven on display :1 of the host foo.bar.)
 
+In order to display status info in the bar, you can do something
+like this in your .xinitrc:
+
+    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
+    do
+    	sleep 1
+    done &
+    exec raven
+
+
 Configuration
 -------------
-The configuration of raven is done by creating a custom config.h
+The configuration of Raven is done by creating a custom config.h
 and (re)compiling the source code.
 
 -------
