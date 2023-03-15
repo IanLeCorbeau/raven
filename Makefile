@@ -31,7 +31,7 @@ clean:
 dist: clean
 	mkdir -p raven-${VERSION}
 	cp -R LICENSE Makefile README config.def.h config.mk\
-		raven.1 drw.h util.h ${SRC} raven.png transient.c raven-${VERSION}
+		raven.1 drw.h util.h ${SRC} transient.c raven-${VERSION}
 	tar -cf raven-${VERSION}.tar raven-${VERSION}
 	gzip raven-${VERSION}.tar
 	rm -rf raven-${VERSION}
