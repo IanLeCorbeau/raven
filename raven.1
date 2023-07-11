@@ -76,7 +76,7 @@ Toggles bar on and off.
 .B Mod1\-t
 Sets tiled layout.
 .TP
-.B Mod1\-f
+.B Mod1\-s
 Sets floating layout.
 .TP
 .B Mod1\-m
@@ -121,6 +121,9 @@ Close focused window.
 .B Mod1\-Shift\-space
 Toggle focused window between tiled and floating state.
 .TP
+.B Mod1\-f
+Toggle fullscreen mode for window.
+.TP
 .B Mod1\-Tab
 Toggles to the previously selected tags.
 .TP
@@ -157,6 +160,12 @@ Resize focused window while dragging. Tiled windows will be toggled to the float
 .SH CUSTOMIZATION
 raven is customized by creating a custom config.h and (re)compiling the source
 code. This keeps it fast, secure and simple.
+.P
+The config.devel.h file is the developer's custom config.h, which uses font-awesome for tag
+names, and sets the default mod key to Super while retaining alt for tag handling. It will
+also set mpv to always open on tag 7. To use this config file, simply rename it to config.h
+before compiling.
+.TP
 .SH SEE ALSO
 .BR dmenu (1),
 .BR st (1)
