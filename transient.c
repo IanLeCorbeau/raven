@@ -1,4 +1,8 @@
-/* cc transient.c -o transient -lX11 */
+/* $Id: transient.c,v 1.1 2023/07/24 23:19:35 lecorbeau Exp $
+ *
+ * See LICENSE file for copyright and license details.
+ * cc transient.c -o transient -lX11 
+ */
 
 #include <stdlib.h>
 #include <unistd.h>

@@ -1,27 +1,37 @@
-.TH RAVEN 1 raven\-VERSION
-.SH NAME
-raven \- dynamic window manager
-.SH SYNOPSIS
-.B raven
-.RB [ \-v ]
-.SH DESCRIPTION
+./"	$Ragnarok: raven.1,v 1.8 2024/11/11 16:24:18 lecorbeau Exp $
+./"
+.Dd $Mdocdate: November 11 2024 $
+.Dt RAVEN 1
+.Os
+.Sh NAME
+.Nm raven
+.Nd A dynamic window manager
+.Sh SYNOPSIS
+.Nm raven
+.Op Fl v
+.Sh DESCRIPTION
 raven is a dynamic window manager for X. It manages windows in tiled, monocle
 and floating layouts. Layouts can be applied dynamically, optimising the
 environment for the application in use and the task performed.
-.P
+.Pp
 In tiled layouts windows are managed in a master and stacking area. The default
 tiled layout places the master area on the left by default, while the rmaster and
 bottomstack layouts places the master area on the right and top, respectively.
 The stacking area contains all other windows. The number of master area windows 
 can be adjusted from zero to an arbitrary number. In monocle layout all windows
-are maximised to the screen size. The Deck layout places the master area to the
-left, and turns the stack area in a Monocle, where all windows cover one another.
-In floating mode, windows can be resized and moved freely. Dialog windows are always
-managed floating, regardless of the layout applied.
-.P
+are maximised to the screen size, minus the status bar and gaps. The Deck layout
+places the master area to the left, and turns the stack area in a Monocle,
+where all windows cover one another. The grid layout organinizes the windows in
+a grid when more than three windows are opened on the same tag. In floating mode,
+windows can be resized and moved freely. Dialog windows are always managed floating,
+regardless of the layout applied.
+.Pp
+The default Layout is Monocle. Windows can be split by toggling any of the tiling
+modes. The default can be changed via a custom config.h file in the layouts section.
+.Pp
 Windows are grouped by tags. Each window can be tagged with one or multiple
 tags. Selecting certain tags displays all windows with these tags.
-.P
+.Pp
 Each screen contains a small status bar which displays all available tags, the
 layout, the title of the focused window, and the text read from the root window
 name property, if the screen is focused. A floating window is indicated with an
@@ -30,158 +40,137 @@ before the windows title.  The selected tags are indicated with a different
 color. The tags of the focused window are indicated with a filled square in the
 top left corner.  The tags which are applied to one or more windows are
 indicated with an empty square in the top left corner.
-.P
+.Pp
 Raven draws a small border around windows to indicate the focus state.
-.SH OPTIONS
-.TP
-.B \-v
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl v
 prints version information to standard output, then exits.
-.SH USAGE
-.SS Status bar
-.TP
-.B X root window name
+.El
+.Sh USAGE
+.Ss Status bar
+.Bl -tag -width "X root window name"
+.It Sy X root window name
 is read and displayed in the status text area. It can be set with the
-.BR xsetroot (1)
+.Xr xsetroot 1
 command.
-.TP
-.B Button1
+.It Sy Button1
 click on a tag label to display all windows with that tag, click on the layout
 label toggles between tiled and floating layout.
-.TP
-.B Button3
+.It Sy Button3
 click on a tag label adds/removes all windows with that tag to/from the view.
-.TP
-.B Mod1\-Button1
+.It Sy MOD\-Button1
 click on a tag label applies that tag to the focused window.
-.TP
-.B Mod1\-Button3
+.It Sy MOD\-Button3
 click on a tag label adds/removes that tag to/from the focused window.
-.SS Keyboard commands
-.TP
-.B Mod1\-,
+.El
+.Ss Keyboard Shortcuts
+The default
+.Sy MOD
+key is
+.Sy Mod4 ,
+a.k.a the
+.Sy Super
+key.
+.Bl -tag -width "MOD\-Shift\-,"
+.It Sy Alt\-Return
+Launch the
+.Xr rt 1
+terminal.
+.It Sy Alt\-p
+Lauch
+.Xr dmenu 1 .
+.It Sy MOD\-,
 Focus previous screen, if any.
-.TP
-.B Mod1\-.
+.It Sy MOD\-.
 Focus next screen, if any.
-.TP
-.B Mod1\-Shift\-,
+.It Sy MOD\-Shift\-,
 Send focused window to previous screen, if any.
-.TP
-.B Mod1\-Shift\-.
+.It Sy MOD\-Shift\-.
 Send focused window to next screen, if any.
-.TP
-.B Mod1\-p
+.It Sy MOD\-p
 Toggles bar on and off.
-.TP
-.B Mod1\-t
+.It Sy MOD\-t
 Sets tiled layout.
-.TP
-.B Mod1\-s
+.It Sy MOD\-s
 Sets floating layout.
-.TP
-.B Mod1\-m
+.It Sy MOD\-m
 Sets monocle layout.
-.TP
-.B Mod1\-b
+.It Sy MOD\-b
 Toggles the bottomstack layout
-.TP
-.B Mod1\-r
+.It Sy MOD\-r
 Toggles the rightmaster layout
-.TP
-.B Mod1\-d
+.It Sy MOD\-d
 Toggles the Deck layout.
-.TP
-.B Mod1\-space
+.It Sy MOD\-g
+Toggles the Grid layout.
+.It Sy MOD\-space
 Toggles between current and previous layout.
-.TP
-.B Mod1\-j
+.It Sy MOD\-j
 Focus next window.
-.TP
-.B Mod1\-k
+.It Sy MOD\-k
 Focus previous window.
-.TP
-.B Mod1\-i
+.It Sy MOD\-i
 Increase number of windows in master area.
-.TP
-.B Mod1\-d
+.It Sy MOD\-d
 Decrease number of windows in master area.
-.TP
-.B Mod1\-l
+.It Sy MOD\-l
 Increase master area size.
-.TP
-.B Mod1\-h
+.It Sy MOD\-h
 Decrease master area size.
-.TP
-.B Mod1\-Return
+.It Sy MOD\-Return
 Zooms/cycles focused window to/from master area (tiled layouts only).
-.TP
-.B Mod1\-Shift\-c
+.It Sy MOD\-Shift\-c
 Close focused window.
-.TP
-.B Mod1\-Shift\-space
+.It Sy MOD\-Shift\-space
 Toggle focused window between tiled and floating state.
-.TP
-.B Mod1\-f
+.It Sy MOD\-f
 Toggle fullscreen mode for window.
-.TP
-.B Mod1\-Tab
+.It Sy MOD\-Tab
 Toggles to the previously selected tags.
-.TP
-.B Mod1\-Shift\-[1..n]
+.It Sy MOD\-Shift\-[1..n]
 Apply nth tag to focused window.
-.TP
-.B Mod1\-Shift\-0
+.It Sy MOD\-Shift\-0
 Apply all tags to focused window.
-.TP
-.B Mod1\-Control\-Shift\-[1..n]
+.It Sy MOD\-Control\-Shift\-[1..n]
 Add/remove nth tag to/from focused window.
-.TP
-.B Mod1\-[1..n]
+.It Sy MOD\-[1..n]
 View all windows with nth tag.
-.TP
-.B Mod1\-0
+.It Sy MOD\-0
 View all windows with any tag.
-.TP
-.B Mod1\-Control\-[1..n]
+.It Sy MOD\-Control\-[1..n]
 Add/remove all windows with nth tag to/from the view.
-.TP
-.B Mod1\-Shift\-q
+.It Sy MOD\-Shift\-q
 Quit raven.
-.SS Mouse commands
-.TP
-.B Mod1\-Button1
+.El
+.Ss Mouse commands
+.Bl -tag -width "MOD\-Button1"
+.It Sy MOD\-Button1
 Move focused window while dragging. Tiled windows will be toggled to the floating state.
-.TP
-.B Mod1\-Button2
+.It Sy MOD\-Button2
 Toggles focused window between floating and tiled state.
-.TP
-.B Mod1\-Button3
+.It Sy MOD\-Button3
 Resize focused window while dragging. Tiled windows will be toggled to the floating state.
-.SH CUSTOMIZATION
-raven is customized by creating a custom config.h and (re)compiling the source
+.El
+.Sh CUSTOMIZATION
+Raven is customized by creating a custom config.h and (re)compiling the source
 code. This keeps it fast, secure and simple.
-.P
-The config.devel.h file is the developer's custom config.h, which uses font-awesome for tag
-names, and sets the default mod key to Super while retaining alt for tag handling. It will
-also set mpv to always open on tag 7. To use this config file, simply rename it to config.h
-before compiling.
-.TP
-.SH SEE ALSO
-.BR dmenu (1),
-.BR st (1)
-.SH ISSUES
+.Sh SEE ALSO
+.Xr dmenu 1 ,
+.Xr st 1
+.Sh ISSUES
 Java applications which use the XToolkit/XAWT backend may draw grey windows
 only. The XToolkit/XAWT backend breaks ICCCM-compliance in recent JDK 1.5 and early
 JDK 1.6 versions, because it assumes a reparenting window manager. Possible workarounds
 are using JDK 1.4 (which doesn't contain the XToolkit/XAWT backend) or setting the
 environment variable
-.BR AWT_TOOLKIT=MToolkit
+.Sy AWT_TOOLKIT=MToolkit
 (to use the older Motif backend instead) or running
-.B xprop -root -f _NET_WM_NAME 32a -set _NET_WM_NAME LG3D
+.Sy Sy xprop -root -f _NET_WM_NAME 32a -set _NET_WM_NAME LG3D
 or
-.B wmname LG3D
+.Sy wmname LG3D
 (to pretend that a non-reparenting window manager is running that the
 XToolkit/XAWT backend can recognize) or when using OpenJDK setting the environment variable
-.BR _JAVA_AWT_WM_NONREPARENTING=1 .
-.SH BUGS
-Send all bug reports with a patch to hackers@suckless.org.
+.Sy _JAVA_AWT_WM_NONREPARENTING=1 .
+.Sh BUGS
+Bug reports can be made at https://github.com/RagnarokOS/raven/issues.

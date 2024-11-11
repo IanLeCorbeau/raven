@@ -1,4 +1,8 @@
-/* See LICENSE file for copyright and license details. */
+/* $Id: drw.c,v 1.1 2023/07/24 23:19:35 lecorbeau Exp $
+ *
+ * See LICENSE file for copyright and license details.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

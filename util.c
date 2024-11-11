@@ -1,4 +1,8 @@
-/* See LICENSE file for copyright and license details. */
+/* $Id: util.c,v 1.1 2023/07/24 23:19:35 lecorbeau Exp $
+ *
+ * See LICENSE file for copyright and license details.
+ */
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>

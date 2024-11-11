@@ -1,4 +1,7 @@
-/* See LICENSE file for copyright and license details. */
+/* $Id: util.h,v 1.1 2023/07/24 23:19:35 lecorbeau Exp $
+ *
+ * See LICENSE file for copyright and license details.
+ */
 
 #define MAX(A, B)               ((A) > (B) ? (A) : (B))
 #define MIN(A, B)               ((A) < (B) ? (A) : (B))

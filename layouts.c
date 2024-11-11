@@ -1,5 +1,11 @@
+/* $Id: layouts.c,v 1.2 2024/11/11 16:12:54 lecorbeau Exp $
+ *
+ * See LICENSE file for copyright and license details.
+ */
+
 static void bottomstack(Monitor *m);
 static void deck(Monitor *m);
+static void grid(Monitor *m);
 static void monocle(Monitor *m);
 static void rightmaster(Monitor *m);
 static void tile(Monitor *);
@@ -67,6 +73,47 @@ deck(Monitor *m) {
 		}
 		else
 			resize(c, m->wx + mw + m->gappx, m->wy + m->gappx, m->ww - mw - (2*c->bw) - 2*m->gappx, m->wh - (2*c->bw) - 2*m->gappx, False);
+}
+
+void
+grid(Monitor *m) {
+	unsigned int n, cols, rows, cn, rn, i, cx, cy, cw, ch;
+	Client *c;
+
+	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) ;
+	if(n == 0)
+		return;
+	if(n == 1){
+		c = nexttiled(m->clients);
+		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
+		return;
+	}
+
+	/* grid dimensions */
+	for(cols = 0; cols <= n/2; cols++)
+		if(cols*cols >= n)
+			break;
+	if(n == 5) /* set layout against the general calculation: not 1:2:2, but 2:3 */
+		cols = 2;
+	rows = n/cols;
+
+	/* window geometries */
+	cw = cols ? m->ww / cols : m->ww;
+	cn = 0; /* current column number */
+	rn = 0; /* current row number */
+	for(i = 0, c = nexttiled(m->clients); c; i++, c = nexttiled(c->next)) {
+		if(i/rows + 1 > cols - n%cols)
+			rows = n/cols + 1;
+		ch = rows ? (m->wh-m->gappx) / rows : m->wh;
+		cx = m->wx + m->gappx + cn*cw;
+		cy = m->wy + m->gappx + rn*ch;
+		resize(c, cx - cn*m->gappx/cols, cy, cw - 2 * (c->bw) - m->gappx - m->gappx/cols, ch - 2 * c->bw - m->gappx, False);
+		rn++;
+		if(rn >= rows) {
+			rn = 0;
+			cn++;
+		}
+	}
 }
 
 void
